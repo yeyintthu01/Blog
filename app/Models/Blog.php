@@ -35,4 +35,14 @@ class Blog
         $blogs=static::all();
         return $blogs->firstWhere('slug', $slug);
     }
+
+    public static function findOrFail($slug)
+    {
+        $blog=static::find($slug);
+        if (!$blog){
+            abort(404);
+           //throw new ModelNotFoundException(); 
+        }
+        return $blog;
+    }
 }
