@@ -20,8 +20,8 @@ use App\Models\Blog;
     ]);
   });
 
-  Route::get('/blogs/{blog}', function ($id) {  
+  Route::get('/blogs/{blog:slug}', function (Blog $blog) {  
     return view('blog', [
-      'blog'=>Blog::findOrFail($id)
+      'blog'=>$blog
     ]); 
   })->where('blog', '[A-z\d\-_]+');
