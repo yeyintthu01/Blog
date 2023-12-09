@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ use App\Models\Category;
 
  Route::get('/', function () {
     return view('blogs', [
-      'blogs'=>Blog::with('category')->get()//eager load //lazy loading
+      'blogs'=>Blog::with('category','author')->get()//eager load //lazy loading
     ]);
   });
 
@@ -29,6 +30,12 @@ use App\Models\Category;
 
   Route::get('/categories/{category:slug}', function (Category $category) {
     return view('blogs', [
-      'blogs'=>$category->blogs
+      'blogs'=>$category->blogs->load('author', 'category')
+    ]);
+  });
+
+  Route::get('/users/{user}', function (User $user) {
+    return view('blogs', [
+      'blogs'=>$user->blogs->load('author', 'category')
     ]);
   });
