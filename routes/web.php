@@ -18,7 +18,7 @@ use App\Models\User;
 
  Route::get('/', function () {
     return view('blogs', [
-      'blogs'=>Blog::with('category','author')->get()//eager load //lazy loading
+      'blogs'=>Blog::latest()->get() //eager load //lazy loading
     ]);
   });
 
@@ -30,12 +30,12 @@ use App\Models\User;
 
   Route::get('/categories/{category:slug}', function (Category $category) {
     return view('blogs', [
-      'blogs'=>$category->blogs->load('author', 'category')
+      'blogs'=>$category->blogs
     ]);
   });
 
-  Route::get('/users/{user}', function (User $user) {
+  Route::get('/users/{user:username}', function (User $user) {
     return view('blogs', [
-      'blogs'=>$user->blogs->load('author', 'category')
+      'blogs'=>$user->blogs
     ]);
   });
