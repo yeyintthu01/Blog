@@ -17,8 +17,13 @@ use App\Models\User;
 */
 
  Route::get('/', function () {
+  $blogs=Blog::latest();
+  if (request('search'))
+  {
+      $blogs=$blogs->where('title', 'LIKE', '%'.request('search').'%');
+  }
     return view('blogs', [
-      'blogs'=>Blog::latest()->get(), //eager load //lazy loading
+      'blogs'=>$blogs->get(), //eager load //lazy loading
       'categories'=>Category::all()
     ]);
   });
