@@ -1,3 +1,4 @@
+@props(['blog'])
 <div class="card">
             <img
               src="https://creativecoder.s3.ap-southeast-1.amazonaws.com/blogs/GOLwpsybfhxH0DW8O6tRvpm4jCR6MZvDtGOFgjq0.jpg"
@@ -7,11 +8,11 @@
             <div class="card-body">
               <h3 class="card-title">{{$blog->title}}</h3>
               <p class="fs-6 text-secondary">
-                {{$blog->author->name}}
+                <a href="/users/{{$blog->author->username}}">{{$blog->author->name}}</a>
                 <span> - {{$blog->created_at->diffForHumans()}}</span>
               </p>
               <div class="tags my-3">
-                <span class="badge bg-primary">{{$blog->category->name}}</span>
+                <a href="/categories/{{$blog->category->slug}}"><span class="badge bg-primary">{{$blog->category->name}}</span></a>
                 <!-- <span class="badge bg-secondary">Css</span>
                 <span class="badge bg-success">Php</span>
                 <span class="badge bg-danger">Javascript</span>
@@ -20,6 +21,6 @@
               <p class="card-text">
                 {{$blog->intro}}
               </p>
-              <a href="./single.html" class="btn btn-primary">Read More</a>
+              <a href="/blogs/{{$blog->slug}}" class="btn btn-primary">Read More</a>
             </div>
           </div>
