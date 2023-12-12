@@ -1,40 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogController;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\User;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
- Route::get('/', function () {
-  $blogs=Blog::latest();
-  if (request('search'))
-  {
-      $blogs=$blogs->where('title', 'LIKE', '%'.request('search').'%');
-  }
-    return view('blogs', [
-      'blogs'=>$blogs->get(), //eager load //lazy loading
-      'categories'=>Category::all()
-    ]);
-  });
 
-  Route::get('/blogs/{blog:slug}', function (Blog $blog) {  
-    return view('blog', [
-      'blog'=>$blog,
-      'randomBlogs'=>Blog::inRandomOrder()->take(3)->get(),
-      'categories'=>Category::all()
-    ]); 
-  })->where('blog', '[A-z\d\-_]+');
+ Route::get('/',[BlogController::class,'index'] );
+ Route::get('/blogs/{blog:slug}',[BlogController::class,'show']);
 
   Route::get('/categories/{category:slug}', function (Category $category) {
     return view('blogs', [
