@@ -1,4 +1,5 @@
 @props(['blogs','categories','currentCategory'])
+
 <section class="container text-center" id="blogs">
       <h1 class="display-5 fw-bold mb-4">Blogs</h1>
       <div class="">
@@ -8,7 +9,7 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
           @foreach ($categories as $category)
-          <li><a class="dropdown-item" href="/categories/{{$category->slug}}">{{$category->name}}</a></li>
+          <li><a class="dropdown-item" href="/?category={{$category->slug}}">{{$category->name}}</a></li>
           @endforeach
         </ul>
       </div>
