@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Blog;
+use App\Models\Category;
+use App\Models\User;
 
 class Blog extends Model
 {
@@ -26,6 +29,11 @@ class Blog extends Model
                 $query->where('slug', $slug);
              });
          });
+         $query->when($filter['username'] ?? false, function ($query, $username) {
+            $query->whereHas('author', function ($query) use ($username){
+                $query->where('username', $username);
+            });
+        });
     }
 
     public function category()
