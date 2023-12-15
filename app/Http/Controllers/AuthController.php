@@ -13,7 +13,13 @@ class AuthController extends Controller
 
     public function store()
     {
-        dd(request()->all());
+        request()->validate([
+            'name'=>'required|min:3',
+            'username'=>'required',
+            'email'=>['required','email'],
+            'password'=>'required|min:8'
+        ]);
+        dd('success');
     }
 
 };
