@@ -7,18 +7,15 @@
 
           @auth 
           <a href="" class="nav-link">Welcome {{auth()->user()->name}}</a>
-          @else
-          <a href="/register" class="nav-link">Register</a>
-          @endauth
-
-          @auth
           <form action="/logout" method="POST">
             @csrf
             <button type="submit" href="" class="nav-link btn btn-link">Logout</button>
           </form>
-          
-          @endauth
+          @else
+          <a href="/register" class="nav-link">Register</a>
+          <a href="/login" class="nav-link">Login</a>
 
+          @endauth
 
           <a href="#subscribe" class="nav-link">Subscribe</a>
         </div>
