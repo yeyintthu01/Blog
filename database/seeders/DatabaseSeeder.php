@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Blog;
+use App\Models\Comment;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,9 +16,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::truncate();
-        Blog::truncate();
-        Category::truncate();
 
         $mgmg=User::factory()->create(['name'=>'mgmg', 'username'=>'mgmg']);
         $aungaung=User::factory()->create(['name'=>'aungaung', 'username'=>'aungaung']);
