@@ -39,7 +39,7 @@
     @endauth
 
     @if($blog->comments->count())
-    <x-comments :comments="$blog->comments"/>
+    <x-comments :comments="$blog->comments()->latest()->paginate(3)"/>
     @endif
     <x-blogs-you-may-like-section :randomBlogs="$randomBlogs" />
 </x-layout>
