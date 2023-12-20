@@ -13,7 +13,11 @@
           <div>
             <div>Author - <a href="/users/{{$blog->author->username}}">{{$blog->author->name}}</a></div>
             <div><a href="/categories/{{$blog->category->slug}}"><span class="badge bg-primary">{{$blog->category->name}}</span></a></div>
-            <div>{{$blog->created_at->diffForHumans()}}</div>
+            <div class="text-secondary">{{$blog->created_at->diffForHumans()}}</div>
+            <div class="text-secondary">
+              <button class="btn btn-warning">Subscribe</button>
+            </div>
+
           </div>
           <p class="lh-md mt-3">
             {{$blog->body}}
@@ -37,7 +41,6 @@
     @if($blog->comments->count())
     <x-comments :comments="$blog->comments"/>
     @endif
-    <x-subscribe />
     <x-blogs-you-may-like-section :randomBlogs="$randomBlogs" />
 </x-layout>
     
