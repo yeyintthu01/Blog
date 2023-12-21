@@ -1,4 +1,4 @@
-@props(['name', 'type'=>'text'])
+@props(['name', 'type'=>'text', 'value'=>''])
 <x-form.wrapper>
     <x-form.label :name="$name"/>
     <input
@@ -6,7 +6,7 @@
         type="{{$type}}"
         class="form-control"
         name="{{$name}}"
-        value="{{old($name)}}"
+        value="{{old($name, $value)}}"
     >
     <x-error :name="$name" />
 </x-form.wrapper>

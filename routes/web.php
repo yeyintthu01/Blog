@@ -28,5 +28,7 @@ use App\Http\Controllers\AdminBlogController;
  Route::post('/admin/blogs/store', [AdminBlogController::class,'store'])->middleware('admin');
 
  Route::delete('/admin/blogs/{blog:slug}/delete', [AdminBlogController::class,'destroy'])->middleware('admin');
+ Route::get('/admin/blogs/{blog:slug}/edit', [AdminBlogController::class,'edit'])->middleware('admin');
+
 
  
