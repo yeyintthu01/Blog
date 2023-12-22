@@ -35,7 +35,6 @@ class BlogController extends Controller
         } else {
           $blog->subscribe();
         }
-
         return back();
     }
 }

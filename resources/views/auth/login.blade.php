@@ -9,7 +9,6 @@
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
                             <input required type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" value="{{old('email')}}">
-                            
                             <x-error name="email"/>
 
                         </div>
