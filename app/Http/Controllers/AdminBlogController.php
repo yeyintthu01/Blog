@@ -6,6 +6,8 @@ use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
+
 
 class AdminBlogController extends Controller
 {
@@ -24,12 +26,14 @@ class AdminBlogController extends Controller
 
     public function store()
     {
+    
         $formData = request()->validate([
             "title" => ["required"],
             "slug" =>  ["required", Rule::unique('blogs', 'slug')],
             "intro" =>  ["required"],
             "body" =>  ["required"],
-            "category_id" =>  ["required", Rule::exists('categories', 'id')]
+            "category_id" =>  ["required", Rule::exists('categories', 'id')],
+            "thumbnail" => ["required", File::image()->max(3072)]
         ]);
         $formData['user_id'] = auth()->id();
         $formData['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
@@ -46,9 +50,28 @@ class AdminBlogController extends Controller
         ]);
     }
 
+    public function update(Blog $blog)
+    {
+        $formData = request()->validate([
+            "title" => ["required"],
+            "slug" =>  ["required", Rule::unique('blogs', 'slug')->ignore($blog->id)],
+            "intro" =>  ["required"],
+            "body" =>  ["required"],
+            "category_id" =>  ["required", Rule::exists('categories', 'id')]
+        ]);
+        $formData['user_id'] = auth()->id();
+        $formData['thumbnail'] = request()->file('thumbnail') ?
+            request()->file('thumbnail')->store('thumbnails') : $blog->thumbnail;
+        $blog->update($formData);
+        return redirect('/');
+        
+    }
+
     public function destroy(Blog $blog)
     {
         $blog->delete();
         return back();
     }
+
+
 }
