@@ -72,6 +72,4 @@ class AdminBlogController extends Controller
         $blog->delete();
         return back();
     }
-
-
 }
